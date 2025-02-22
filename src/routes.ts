@@ -1,21 +1,15 @@
 import { lazy } from "react";
 
-const LandingPage = lazy(() => import("./pages/login"));
-const LoginPage = lazy(() => import("./pages/login"));
-const SignUpPage = lazy(() => import("./pages/signUp"));
+const HomePage = lazy(() => import("./pages/home"));
+const ProductsPage = lazy(() => import("./pages/products"));
 
 export const routes = [
-  { path: "", name: "Landing", component: LandingPage, isPrivate: false },
+  { path: "/", name: "Home", component: HomePage, isPrivate: false },
+
   {
-    path: "login",
-    name: "Login",
-    component: LoginPage,
-    isPrivate: false,
-  },
-  {
-    path: "sign-up",
-    name: "Sign Up",
-    component: SignUpPage,
-    isPrivate: false,
+    path: "/products",
+    name: "Products",
+    component: ProductsPage,
+    isPrivate: true,
   },
 ];
