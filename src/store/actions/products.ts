@@ -56,3 +56,17 @@ export const deleteProduct = createAsyncThunk(
     return resp as IProduct;
   }
 );
+
+//extra
+
+export const getCategories = createAsyncThunk(
+  "products/categories",
+  async (cb?: () => void) => {
+    const resp = await fetchApi({ method: "GET", url: `/categories` });
+    if (cb && !!resp) {
+      cb();
+    }
+
+    return resp;
+  }
+);

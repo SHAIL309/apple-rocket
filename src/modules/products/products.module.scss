@@ -5,7 +5,17 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-
+  flex-direction: column;
+  gap: 8px;
+  .filterWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .search {
+      width: 50%;
+    }
+  }
   .btnWrapper {
     display: flex;
     flex-wrap: wrap;

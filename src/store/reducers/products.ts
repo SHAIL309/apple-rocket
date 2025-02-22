@@ -2,10 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   deleteProduct,
   getAllProducts,
+  getCategories,
   getProductById,
   updateProduct,
 } from "../actions";
-import { DUMMY_DATA } from "src/constants/products";
+
 import { IProduct } from "src/interfaces/products";
 
 export interface IProductsSlice {
@@ -15,6 +16,8 @@ export interface IProductsSlice {
   fetchLoader: boolean;
   loading: boolean;
   error: string;
+  categories: any;
+  fetchCatLoading: boolean;
 }
 
 const initialState: IProductsSlice = {
@@ -24,6 +27,8 @@ const initialState: IProductsSlice = {
   loading: false,
   error: "",
   message: "",
+  categories: null,
+  fetchCatLoading: false,
 };
 
 export const productsSlice = createSlice({
@@ -86,6 +91,18 @@ export const productsSlice = createSlice({
     });
     builder.addCase(deleteProduct.rejected, (state, action) => {
       state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+    //get-categories
+    builder.addCase(getCategories.pending, (state) => {
+      state.fetchCatLoading = true;
+    });
+    builder.addCase(getCategories.fulfilled, (state, action) => {
+      state.fetchCatLoading = false;
+      state.categories = action.payload;
+    });
+    builder.addCase(getCategories.rejected, (state, action) => {
+      state.fetchCatLoading = false;
       state.error = action.error.message || "Something went wrong";
     });
   },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Input, Button, message } from "antd";
-import styles from "./updateProductModal.module.scss";
+import classes from "./updateProductModal.module.scss";
 import { IProduct } from "src/interfaces/products";
 
 interface UpdateProductModalProps {
@@ -57,11 +57,11 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
       open={open}
       onCancel={onClose}
       footer={null}
-      className={styles.updateModal}
+      className={classes.updateModal}
       confirmLoading={confirmLoading}
     >
-      <div className={styles.modalContent}>
-        <div className={styles.formGroup}>
+      <div className={classes.modalContent}>
+        <div className={classes.formGroup}>
           <label>Product Title</label>
           <Input
             value={updatedProduct?.title}
@@ -70,7 +70,7 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
           />
         </div>
 
-        <div className={styles.formGroup}>
+        <div className={classes.formGroup}>
           <label>Product Price</label>
           <Input
             value={updatedProduct?.price}
@@ -80,7 +80,7 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
           />
         </div>
 
-        <div className={styles.formGroup}>
+        <div className={classes.formGroup}>
           <label>Product Description</label>
           <Input.TextArea
             value={updatedProduct?.description}
@@ -90,7 +90,7 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
           />
         </div>
 
-        <div className={styles.formGroup}>
+        <div className={classes.formGroup}>
           <label>Product Category</label>
           <Input
             value={updatedProduct?.category}
@@ -99,11 +99,15 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
           />
         </div>
 
-        <div className={styles.modalFooter}>
+        <div className={classes.modalFooter}>
           <Button onClick={onClose} style={{ marginRight: "10px" }}>
             Cancel
           </Button>
-          <Button type="primary" onClick={handleUpdate}>
+          <Button
+            type="primary"
+            onClick={handleUpdate}
+            className={classes.updateButton}
+          >
             Update Product
           </Button>
         </div>

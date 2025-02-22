@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Space, Table } from "antd";
+import React, { useMemo, useState } from "react";
+import { Button, Popover, Space, Table } from "antd";
 import classes from "./products.module.scss";
 import { P_COLUMNS, ACTION_BUTTON } from "src/constants/products";
 import { useAppSelector, useStoreActions } from "src/store/hooks";
@@ -8,13 +8,22 @@ import { ProductDetailsModal } from "src/components/ProductDetailsModal";
 import { ConfirmationModal } from "src/components/ConfirmationModal";
 import { deleteProduct, updateProduct } from "src/store/actions";
 import { UpdateProductModal } from "src/components/UpdateProductModal";
+import Search from "antd/es/input/Search";
+import { useWindowSize } from "src/utils/useWindowSize";
+import DataFiltration from "./DataFiltration";
 
 const Products = () => {
   const { products, loading } = useAppSelector((state) => state.products);
   const actions = useStoreActions({ updateProduct, deleteProduct });
+
+  const { isMobile, width = 0 } = useWindowSize();
+
+  const [search, setSearch] = useState("");
   const [modal, setModal] = useState<{ data: IProduct; type: string } | null>(
     null
   );
+  const [selectedFilter, setSelectedFilter] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<string>("");
 
   const handleModalClose = () => setModal(null);
 
@@ -46,7 +55,7 @@ const Products = () => {
             maxWidth: "300px",
           }}
         >
-          {text}
+          <Popover content={text}>{text}</Popover>
         </div>
       ),
     },
@@ -142,15 +151,53 @@ const Products = () => {
         );
     }
   };
+
+  const dataSource = useMemo(() => {
+    if (!!search) {
+      return products.filter((p) => p.title.includes(search));
+    }
+    if (!!selectedFilter && !!selectedFilter) {
+      return products.filter(
+        (p) =>
+          p[selectedFilter.toLowerCase() as "category" | "price"] ===
+          selectedOption
+      );
+    }
+    return products;
+  }, [products, search, selectedOption]);
+
   return (
     <div className={classes.container}>
+      <div className={classes.filterWrapper}>
+        <Search
+          placeholder="Search product"
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          className={classes.search}
+        />
+        <DataFiltration
+          selectedFilter={selectedFilter}
+          setSelectedFilter={(fl) => {
+            setSelectedFilter(fl);
+          }}
+          setSelectedOption={(op) => {
+            setSelectedOption(op);
+          }}
+          selectedOption={selectedOption}
+        />
+      </div>
       <Table
         columns={columnsWithActions}
-        dataSource={products}
+        dataSource={dataSource}
         rowKey="id"
         bordered
         tableLayout="auto"
-        pagination={{ pageSize: 6, total: (products || []).length }}
+        pagination={false}
+        scroll={{
+          y: isMobile ? 400 : width > 780 && width <= 1024 ? 450 : 500,
+        }}
+        onScroll={() => {}}
       />
       {!!modal && <>{getModal()}</>}
     </div>

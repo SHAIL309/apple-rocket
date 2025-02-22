@@ -12,3 +12,8 @@ export interface IProduct {
   image: string;
   rating: IRating;
 }
+
+export interface IFilterOptions {
+  category: string[];
+  price: string[];
+}

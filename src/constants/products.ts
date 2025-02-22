@@ -28,6 +28,11 @@ export const P_COLUMNS = [
   },
 ];
 
+export const filterOptions = {
+  price: ["Under $50", "$50 - $100", "$100 - $200", "Above $200"],
+  // rate: ["4 Stars & Up", "3 Stars & Up", "2 Stars & Up", "1 Star & Up"],
+};
+
 export const DUMMY_DATA = [
   {
     id: 1,
