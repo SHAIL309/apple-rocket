@@ -27,14 +27,18 @@
         top: 3px;
         background-color: $accent;
         border-radius: 8px 0;
-        width: 70px;
+        width: 90px;
         color: $secondary;
         border: 1px solid $secondary;
+        z-index: 999;
       }
       .listItem {
         cursor: pointer;
         position: relative;
         padding-bottom: 4px;
+        > span {
+          margin-left: 2px;
+        }
         &::after {
           content: "";
           position: absolute;

@@ -2,14 +2,28 @@ import React, { useState } from "react";
 import logo from "../../assets/images/Logo.png";
 
 import { Image } from "antd";
-import { AUTH_ACTIONS, NAVBAR_OPTIONS } from "../../constants/navbar";
+import { AUTH_ACTIONS } from "../../constants/navbar";
 import classes from "./navbar.module.scss";
 import { useWindowSize } from "src/utils/useWindowSize";
-import { MenuOutlined } from "@ant-design/icons";
+import {
+  LoginOutlined,
+  LogoutOutlined,
+  MenuOutlined,
+  UserAddOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { useStoreActions } from "src/store/hooks";
 import { userAuthAction } from "src/store/actions";
 import { logout } from "src/store/reducers/auth";
 import { getUserData } from "src/utils/helper";
+
+const NAVBAR_OPTIONS = {
+  loggedIn: [{ label: AUTH_ACTIONS.LOGOUT, icon: <LogoutOutlined /> }],
+  public: [
+    { label: AUTH_ACTIONS.LOGIN, icon: <LoginOutlined /> },
+    { label: AUTH_ACTIONS.SIGNUP, icon: <UserAddOutlined /> },
+  ],
+};
 
 const navList = (
   isLoggedIn: boolean,
@@ -19,7 +33,10 @@ const navList = (
   const userData = getUserData();
 
   const options = isLoggedIn
-    ? [`Welcome ${userData.username}`, ...NAVBAR_OPTIONS.loggedIn]
+    ? [
+        { label: `Welcome ${userData.username}`, icon: <UserOutlined /> },
+        ...NAVBAR_OPTIONS.loggedIn,
+      ]
     : NAVBAR_OPTIONS.public;
   return (
     <ul className={`${classes.list} ${isMobile ? classes.mobileList : ""}`}>
@@ -28,10 +45,11 @@ const navList = (
           key={i}
           className={classes.listItem}
           onClick={() => {
-            if (onclick) onclick(o);
+            if (onclick) onclick(o.label);
           }}
         >
-          {o}
+          {o.icon}
+          <span> {o.label}</span>
         </li>
       ))}
     </ul>
