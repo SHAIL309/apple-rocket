@@ -9,18 +9,23 @@ import { MenuOutlined } from "@ant-design/icons";
 import { useStoreActions } from "src/store/hooks";
 import { userAuthAction } from "src/store/actions";
 import { logout } from "src/store/reducers/auth";
+import { getUserData } from "src/utils/helper";
 
 const navList = (
   isLoggedIn: boolean,
   onclick?: (key: string) => void,
   isMobile?: boolean
 ) => {
-  const options = isLoggedIn ? NAVBAR_OPTIONS.loggedIn : NAVBAR_OPTIONS.public;
+  const userData = getUserData();
+
+  const options = isLoggedIn
+    ? [`Welcome ${userData.username}`, ...NAVBAR_OPTIONS.loggedIn]
+    : NAVBAR_OPTIONS.public;
   return (
     <ul className={`${classes.list} ${isMobile ? classes.mobileList : ""}`}>
       {options.map((o, i) => (
         <li
-          key={`${o}-${i}`}
+          key={i}
           className={classes.listItem}
           onClick={() => {
             if (onclick) onclick(o);
@@ -38,16 +43,20 @@ const Navbar: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
   const { isMobile } = useWindowSize();
   const action = useStoreActions({ userAuthAction, logout });
 
+  const closeMenu = () => setShow(false);
+
   const handleAction = (k: string) => {
     switch (k) {
       case AUTH_ACTIONS.LOGOUT:
-        return action.logout();
+        return setTimeout(() => action.logout(), 1000);
       case AUTH_ACTIONS.LOGIN:
+        closeMenu();
         return action.userAuthAction({ data: AUTH_ACTIONS.LOGIN });
       case AUTH_ACTIONS.SIGNUP:
+        closeMenu();
         return action.userAuthAction({ data: AUTH_ACTIONS.SIGNUP });
       default:
-        return;
+        closeMenu();
     }
   };
 

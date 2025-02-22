@@ -4,7 +4,7 @@ const HomePage = lazy(() => import("./pages/home"));
 const ProductsPage = lazy(() => import("./pages/products"));
 
 export const routes = [
-  { path: "/", name: "Home", component: HomePage, isPrivate: false },
+  { path: "/home", name: "Home", component: HomePage, isPrivate: false },
 
   {
     path: "/products",

@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, Navigate } from "react-router-dom";
+import React from "react";
+import { Navigate } from "react-router-dom";
 import { Navbar } from "../components/navbar";
-
-// Utility to get user data (for demo purposes)
-const getUserData = () => {
-  return JSON.parse(localStorage.getItem("user") || "null"); // Assuming user data is stored as a JSON object
-};
+import { getUserData } from "src/utils/helper";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -13,18 +9,11 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, isPrivate }) => {
-  const location = useLocation();
-  const [userData, setUserData] = useState<any>(null); // For storing user data
-
-  useEffect(() => {
-    // Get user data from localStorage on initial render
-    const data = getUserData();
-    setUserData(data);
-  }, []);
+  const userData = getUserData();
 
   // If the route is private but the user is not logged in (no userData), redirect to the home page
   if (isPrivate && !userData) {
-    return <Navigate to="/" state={{ from: location }} />;
+    return <Navigate to="/home" />;
   }
 
   // If the route is public and the user is logged in (userData exists), redirect to a protected route (like /products)
@@ -34,10 +23,10 @@ const Layout: React.FC<LayoutProps> = ({ children, isPrivate }) => {
 
   return (
     <>
-      <header style={{ height: "20%" }}>
+      <header style={{ height: "60px" }}>
         <Navbar isLoggedIn={!!userData} />
       </header>
-      <main style={{ height: "80%" }}>{children}</main>
+      <main style={{ marginTop: "40px" }}>{children}</main>
     </>
   );
 };
