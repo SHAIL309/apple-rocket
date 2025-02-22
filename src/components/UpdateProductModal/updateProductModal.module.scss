@@ -1,0 +1,44 @@
+@import "/src/assets/scss/color.scss";
+
+.updateModal {
+  .ant-modal-content {
+    background-color: $primary-text;
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .modalContent {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formGroup {
+    margin-bottom: 16px;
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #4a3d2b;
+      margin-bottom: 8px;
+    }
+
+    input,
+    .ant-input,
+    .ant-input-number {
+      border-radius: 8px;
+      background-color: #e0c5a0;
+      border: 1px solid $primary;
+    }
+
+    .ant-input:focus,
+    .ant-input-number:focus {
+      border-color: $primary;
+    }
+  }
+
+  .modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+}
