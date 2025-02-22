@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Navigate } from "react-router-dom";
+import { Navbar } from "../components/navbar";
+
+// Utility to get user data (for demo purposes)
+const getUserData = () => {
+  return JSON.parse(localStorage.getItem("user") || "null"); // Assuming user data is stored as a JSON object
+};
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -7,54 +13,33 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, isPrivate }) => {
-  const token = false; // Check if the user is authenticated
-  const location = useLocation(); // To track the current route (for redirection)
+  const location = useLocation();
+  const [userData, setUserData] = useState<any>(null); // For storing user data
 
-  // If the route is private but the user is not logged in, redirect to login page
-  if (isPrivate && !token) {
-    return <Navigate to="/login" state={{ from: location }} />;
+  useEffect(() => {
+    // Get user data from localStorage on initial render
+    const data = getUserData();
+    setUserData(data);
+  }, []);
+
+  // If the route is private but the user is not logged in (no userData), redirect to the home page
+  if (isPrivate && !userData) {
+    return <Navigate to="/" state={{ from: location }} />;
   }
 
-  // If the route is public and the user is logged in, redirect to a protected route (like /dashboard)
-  if (!isPrivate && token) {
-    return <Navigate to="/dashboard" />;
+  // If the route is public and the user is logged in (userData exists), redirect to a protected route (like /products)
+  if (!isPrivate && userData) {
+    return <Navigate to="/products" />;
   }
-
-  const getNavbar = () => {
-    if (token) {
-      return <NavbarLoggedIn />;
-    }
-    return <NavbarGuest />;
-  };
 
   return (
-    <div className="layout">
-      <header>{getNavbar()}</header>
-      <main>{children}</main>
-    </div>
+    <>
+      <header style={{ height: "20%" }}>
+        <Navbar isLoggedIn={!!userData} />
+      </header>
+      <main style={{ height: "80%" }}>{children}</main>
+    </>
   );
 };
-
-// Navbar components for logged in and guest states
-
-const NavbarLoggedIn: React.FC = () => (
-  <nav>
-    <ul>
-      <li>
-        <a href="/">NavbarLoggedIn</a>
-      </li>
-    </ul>
-  </nav>
-);
-
-const NavbarGuest: React.FC = () => (
-  <nav>
-    <ul>
-      <li>
-        <a href="/">NavbarGuest</a>
-      </li>
-    </ul>
-  </nav>
-);
 
 export default Layout;
