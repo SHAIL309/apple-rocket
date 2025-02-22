@@ -25,7 +25,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logout: () => {
-      localStorage.removeItem("user");
+      localStorage.removeItem("isLoggedIn");
       window.location.reload();
       return initialState;
     },

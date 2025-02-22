@@ -8,7 +8,7 @@ import { IUser } from "src/interfaces/auth";
 import classes from "./authForm.module.scss";
 import { userAuthAction, userLogin, userSignUp } from "src/store/actions";
 import { useNavigate } from "react-router-dom";
-import { Alert, Modal } from "antd";
+import { Modal } from "antd";
 
 const AuthForm = () => {
   const { authAction, actionLoading } = useAppSelector((state) => state.auth);
@@ -58,7 +58,7 @@ const AuthForm = () => {
               actions.userAuthAction({ data: AUTH_ACTIONS.SIGNUP });
             }}
           >
-            Signup
+            {AUTH_ACTIONS.SIGNUP}
           </span>
         </>
       ) : (
@@ -70,7 +70,7 @@ const AuthForm = () => {
               actions.userAuthAction({ data: AUTH_ACTIONS.LOGIN });
             }}
           >
-            Login
+            {AUTH_ACTIONS.LOGIN}
           </span>
         </>
       )}

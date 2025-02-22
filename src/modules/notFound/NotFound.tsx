@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./notFound.module.scss";
 import { NOT_FOUND } from "src/constants/notfound";
-import { getUserData } from "src/utils/helper";
+import { loggedIn } from "src/utils/helper";
 
 const NotFound: React.FC = () => {
-  const isLoggedIn = !!getUserData();
+  const isLoggedIn = loggedIn();
   return (
     <div className={classes.container}>
       <div className={classes.content}>

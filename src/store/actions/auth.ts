@@ -17,6 +17,7 @@ export const userSignUp = createAsyncThunk(
   (payload: IPayload<IUser>) => {
     const { data, cb } = payload;
     localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem("isLoggedIn", JSON.stringify(true));
     userAuthAction({ data: "" });
     if (cb) {
       cb();
@@ -30,6 +31,7 @@ export const userLogin = createAsyncThunk(
   (payload: IPayload<IUser>) => {
     const { data, cb } = payload;
     localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem("isLoggedIn", JSON.stringify(true));
     userAuthAction({ data: "" });
     if (cb) {
       cb();

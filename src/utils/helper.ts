@@ -6,3 +6,12 @@ export const getUserData = () => {
     return null;
   }
 };
+
+export const loggedIn = () => {
+  const status = localStorage.getItem("isLoggedIn");
+  if (status) {
+    return JSON.parse(status);
+  } else {
+    return false;
+  }
+};

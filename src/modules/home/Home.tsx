@@ -14,8 +14,13 @@ const Home = () => {
         arrows={!isMobile}
       >
         {homePageCarousal.map((i, k) => (
-          <React.Fragment key={k}>
-            <Image src={i} height={500} width={"100%"} preview={false} />
+          <React.Fragment key={`${i}-${k}`}>
+            <Image
+              src={i}
+              height={isMobile ? "80dvh" : 600}
+              width={"100%"}
+              preview={false}
+            />
           </React.Fragment>
         ))}
       </Carousel>

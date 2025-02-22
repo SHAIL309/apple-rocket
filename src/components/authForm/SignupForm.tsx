@@ -3,6 +3,7 @@ import { Button, Form, Input } from "antd";
 
 import classes from "./authForm.module.scss";
 import { requiredMessage } from "../Form/Form";
+import { AUTH_ACTIONS } from "src/constants/navbar";
 
 const SignupForm = ({ onSignupFinish }: { onSignupFinish: any }) => {
   return (
@@ -83,7 +84,7 @@ const SignupForm = ({ onSignupFinish }: { onSignupFinish: any }) => {
           block
           className={classes.submitButton}
         >
-          Signup
+          {AUTH_ACTIONS.SIGNUP}
         </Button>
       </Form.Item>
     </Form>
