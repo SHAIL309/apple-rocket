@@ -36,6 +36,7 @@ const ProductDetailsModal: React.FC<ProductModalProps> = ({
           src={data.image}
           alt={data.title}
           className={classes.productModalImage}
+          wrapperClassName={classes.productModalImageWrapper}
         />
         <div className={classes.productModalDetails}>
           <Typography.Title level={3} className={classes.productModalTitle}>

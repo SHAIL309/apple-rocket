@@ -27,6 +27,15 @@ code {
   }
 }
 
+.ant-modal-content {
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 20px;
+  @media screen and (max-width: 870px) {
+    padding: 8px !important;
+  }
+}
+
 /* .ant-table-thead {
   .ant-table-cell {
     background-color: #4a3d2b !important;

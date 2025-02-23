@@ -1,26 +1,29 @@
 @import "/src/assets/scss/color.scss";
+@import "/src/assets/scss/breakpoints.scss";
 
 .productModal {
   background-color: $secondary-bg;
   padding: 10px 12px;
-  .ant-modal-content {
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 20px;
-  }
 
   .productModalContent {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include responsive("smDown") {
+      flex-direction: column;
+    }
   }
 
   .productModalImage {
-    width: 300px;
-    height: 500px;
+    max-width: 300px;
+    width: 100%;
+    max-height: 500px;
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    @include responsive("smDown") {
+      max-height: 200px;
+    }
   }
 
   .productModalDetails {
@@ -50,6 +53,10 @@
     font-size: 16px;
     color: $secondary;
     margin-bottom: 15px;
+    @include responsive("smDown") {
+      max-height: 100px;
+      overflow-y: scroll;
+    }
   }
 
   .productModalRating {
@@ -66,6 +73,10 @@
     color: $primary-text;
     border: none;
     right: 10px;
+    @include responsive("smDown") {
+      right: 8px;
+      bottom: 10px;
+    }
     &:hover {
       color: $primary !important;
       background-color: transparent !important;
