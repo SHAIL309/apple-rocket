@@ -1,0 +1,91 @@
+$breakpoint-320: 320px;
+$breakpoint-480: 480px;
+$breakpoint-780: 780px;
+$breakpoint-820: 820px;
+$breakpoint-1024: 1024px;
+$breakpoint-1200: 1200px;
+$breakpoint-1920: 1920px;
+
+// media queries
+@mixin responsive($keys...) {
+  @each $key in $keys {
+    @if $key == xs {
+      /* 320px — 480px: Mobile devices */
+      @media only screen and (min-width: $breakpoint-320) and (max-width: $breakpoint-480) {
+        @content;
+      }
+    }
+    @if $key == xsDown {
+      /* 0px — 480px: Mobile devices */
+      @media only screen and (max-width: $breakpoint-480) {
+        @content;
+      }
+    }
+
+    @if $key == sm {
+      /* 481px — 768px: iPads, Tablets */
+      @media only screen and (min-width: ($breakpoint-480 + 1)) and (max-width: $breakpoint-780) {
+        @content;
+      }
+    }
+    @if $key == smDown {
+      /* 0px — 768px: iPads, Tablets */
+      @media only screen and (max-width: $breakpoint-780) {
+        @content;
+      }
+    }
+    @if $key == smDown1 {
+      /* 0px — 820px: iPads Air */
+      @media only screen and (max-width: $breakpoint-820) {
+        @content;
+      }
+    }
+
+    @if $key == md {
+      /* 769px — 1024px: Small screens, laptops */
+      @media only screen and (min-width: ($breakpoint-780 + 1)) and (max-width: $breakpoint-1024) {
+        @content;
+      }
+    }
+
+    @if $key == mdUp {
+      /* 769px — 1024px: Small screens, laptops */
+      @media only screen and (min-width: ($breakpoint-780 + 1)) {
+        @content;
+      }
+    }
+
+    @if $key == mdDown {
+      /* 0px — 1024px: Small screens, laptops */
+      @media only screen and (max-width: $breakpoint-1024) {
+        @content;
+      }
+    }
+
+    @if $key == lg {
+      /* 0px — 1200px: Desktops, large screens */
+      @media only screen and (min-width: ($breakpoint-1024 + 1)) and (max-width: $breakpoint-1200) {
+        @content;
+      }
+    }
+    @if $key == lgDown {
+      /* 0px — 1200px: Desktops, large screens */
+      @media only screen and (max-width: $breakpoint-1200) {
+        @content;
+      }
+    }
+
+    @if $key == xl {
+      /* 1201px and more —  Extra large screens, TV */
+      @media only screen and (min-width: ($breakpoint-1024 + 1)) {
+        @content;
+      }
+    }
+    @if $key == xxl {
+      /* 1920px and more —  Extra+ FullHD desktop */
+      @media only screen and (min-width: $breakpoint-1920) {
+        @content;
+      }
+    }
+  }
+}

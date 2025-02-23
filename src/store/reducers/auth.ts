@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLogin, userSignUp } from "../actions";
-import { IUser } from "../../modules/auth/interfaces/auth";
+import { userAuthAction, userLogin, userSignUp } from "../actions";
+import { IUser } from "../../interfaces/auth";
 
 export interface IAuthSlice {
   user: IUser | null;
   message: string;
   loading: boolean;
   error: string;
+  authAction?: string;
+  actionLoading?: boolean;
 }
 
 const initialState: IAuthSlice = {
@@ -14,6 +16,8 @@ const initialState: IAuthSlice = {
   loading: false,
   error: "",
   message: "",
+  authAction: "",
+  actionLoading: false,
 };
 
 export const authSlice = createSlice({
@@ -21,12 +25,22 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logout: () => {
-      localStorage.removeItem("user");
+      localStorage.removeItem("isLoggedIn");
+      window.location.reload();
       return initialState;
     },
     reset: () => initialState,
   },
   extraReducers: (builder) => {
+    //user-action
+    builder.addCase(userAuthAction.pending, (state) => {
+      state.actionLoading = true;
+    });
+    builder.addCase(userAuthAction.fulfilled, (state, action) => {
+      state.actionLoading = false;
+      state.authAction = action.payload;
+    });
+
     //user-signup
     builder.addCase(userSignUp.pending, (state) => {
       state.loading = true;

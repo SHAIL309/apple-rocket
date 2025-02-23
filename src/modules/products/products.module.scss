@@ -1,0 +1,52 @@
+@import "/src/assets/scss/color.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  flex-direction: column;
+  gap: 8px;
+  .filterWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .search {
+      width: 50%;
+    }
+  }
+  .btnWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+  }
+  .viewButton {
+    background-color: #1890ff;
+    color: $primary-text;
+    &:hover {
+      background-color: transparent;
+      color: #40a9ff !important;
+      border-color: #40a9ff !important;
+    }
+  }
+  .updateButton {
+    background-color: #faad14;
+    color: $primary-text;
+    &:hover {
+      background-color: transparent;
+      color: #ffc53d !important;
+      border-color: #ffc53d !important;
+    }
+  }
+  .deleteButton {
+    background-color: $danger-text;
+    color: $primary-text;
+    &:hover {
+      background-color: transparent;
+      color: $danger-text !important;
+      border-color: $danger-text !important;
+    }
+  }
+}

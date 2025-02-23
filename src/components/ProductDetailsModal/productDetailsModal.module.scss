@@ -1,0 +1,75 @@
+@import "/src/assets/scss/color.scss";
+
+.productModal {
+  background-color: $secondary-bg;
+  padding: 10px 12px;
+  .ant-modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  .productModalContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .productModalImage {
+    width: 300px;
+    height: 500px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .productModalDetails {
+    margin-left: 20px;
+    max-width: 350px;
+  }
+
+  .productModalTitle {
+    color: $secondary;
+    font-weight: bold;
+  }
+
+  .productModalCategory {
+    display: block;
+    color: $primary;
+    margin-bottom: 10px;
+  }
+
+  .productModalPrice {
+    display: block;
+    color: $primary;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .productModalDescription {
+    font-size: 16px;
+    color: $secondary;
+    margin-bottom: 15px;
+  }
+
+  .productModalRating {
+    margin-top: 10px;
+  }
+
+  .productModalRatingCount {
+    margin-left: 8px;
+    color: $primary;
+  }
+
+  .productModalCloseButton {
+    background-color: $primary;
+    color: $primary-text;
+    border: none;
+    right: 10px;
+    &:hover {
+      color: $primary !important;
+      background-color: transparent !important;
+      border: 1px solid $primary !important;
+    }
+  }
+}

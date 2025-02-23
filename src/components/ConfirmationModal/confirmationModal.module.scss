@@ -1,0 +1,30 @@
+@import "/src/assets/scss/color.scss";
+
+.deleteModal {
+  background-color: $secondary-bg;
+  .ant-modal-content {
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .modalTitle {
+    color: $secondary;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+
+  .modalContent {
+    color: $secondary;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .confirmBtn {
+    background-color: $danger-text;
+    &:hover {
+      background-color: transparent !important;
+      color: $danger-text !important;
+      border-color: $danger-text !important;
+    }
+  }
+}

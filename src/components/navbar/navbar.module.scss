@@ -1,0 +1,94 @@
+@import "/src/assets/scss/color.scss";
+
+.navContainer {
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $primary;
+  .logo {
+    position: relative;
+    padding: 8px;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      background-color: #c78d42;
+      width: 0;
+      transition: width 0.3s ease;
+    }
+
+    &::before {
+      top: 0;
+      left: 0;
+    }
+
+    &::after {
+      bottom: 0;
+      right: 0;
+    }
+
+    &:hover {
+      &::before {
+        width: 100%;
+        left: 0;
+      }
+
+      &::after {
+        width: 100%;
+        right: 0;
+        left: initial;
+      }
+    }
+  }
+  .menuWrapper {
+    position: relative;
+    .menu {
+      svg {
+        fill: $secondary !important;
+      }
+    }
+    .list {
+      display: flex;
+      align-items: center;
+      list-style-type: none;
+      gap: 12px;
+      color: $primary-text;
+      &.mobileList {
+        padding: 2px 4px !important;
+        flex-direction: column;
+        position: absolute;
+        right: 0px;
+        top: 3px;
+        background-color: $accent;
+        border-radius: 8px 0;
+        width: 90px;
+        color: $secondary;
+        border: 1px solid $secondary;
+        z-index: 999;
+      }
+      .listItem {
+        cursor: pointer;
+        position: relative;
+        padding-bottom: 4px;
+        > span {
+          margin-left: 2px;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: #c78d42;
+          transition: width 0.3s ease;
+        }
+        &:hover::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import "/src/assets/scss/color.scss";
+.form {
+  margin-top: 20px;
+  .label {
+    color: $primary;
+    > span {
+      color: $danger-text;
+      margin-left: 2px;
+    }
+  }
+  .input {
+    background-color: $primary-text;
+    border: 1px solid $secondary;
+    border-radius: 4px;
+    color: $secondary;
+  }
+  .submitButton {
+    background-color: $primary;
+    border-color: $primary;
+    color: $primary-text;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+}
