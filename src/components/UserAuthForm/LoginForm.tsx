@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Input } from "antd";
 import classes from "./userAuthForm.module.scss";
 import { requiredMessage } from "../Form/Form";
-import { AUTH_ACTIONS } from "src/constants/navbar";
+import { AUTH_ACTIONS } from "src/constants/header";
 import { getUserData } from "src/utils/helper";
 
 const LoginForm = ({ onLoginFinish }: { onLoginFinish: any }) => {

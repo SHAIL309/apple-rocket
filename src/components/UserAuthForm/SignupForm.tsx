@@ -3,7 +3,7 @@ import { Button, Form, Input } from "antd";
 
 import classes from "./userAuthForm.module.scss";
 import { requiredMessage } from "../Form/Form";
-import { AUTH_ACTIONS } from "src/constants/navbar";
+import { AUTH_ACTIONS } from "src/constants/header";
 
 const SignupForm = ({ onSignupFinish }: { onSignupFinish: any }) => {
   return (

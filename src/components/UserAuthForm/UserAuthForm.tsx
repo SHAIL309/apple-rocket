@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useAppSelector, useStoreActions } from "src/store/hooks";
-import { AUTH_ACTIONS } from "src/constants/navbar";
+import { AUTH_ACTIONS } from "src/constants/header";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import { IUser } from "src/interfaces/auth";
