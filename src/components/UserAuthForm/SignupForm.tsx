@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 
-import classes from "./authForm.module.scss";
+import classes from "./userAuthForm.module.scss";
 import { requiredMessage } from "../Form/Form";
 import { AUTH_ACTIONS } from "src/constants/navbar";
 
