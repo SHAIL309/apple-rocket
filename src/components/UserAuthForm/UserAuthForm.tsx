@@ -5,12 +5,12 @@ import { AUTH_ACTIONS } from "src/constants/navbar";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import { IUser } from "src/interfaces/auth";
-import classes from "./authForm.module.scss";
+import classes from "./userAuthForm.module.scss";
 import { userAuthAction, userLogin, userSignUp } from "src/store/actions";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
 
-const AuthForm = () => {
+const UserAuthForm = () => {
   const { authAction, actionLoading } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
   const actions = useStoreActions({ userLogin, userSignUp, userAuthAction });
@@ -117,4 +117,4 @@ const AuthForm = () => {
   );
 };
 
-export default AuthForm;
+export default UserAuthForm;
