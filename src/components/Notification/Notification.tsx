@@ -25,6 +25,8 @@ const Notification: React.FC<NotificationProps> = ({
 
   React.useEffect(() => {
     openNotification();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, message, description]);
 
   return <>{contextHolder}</>;

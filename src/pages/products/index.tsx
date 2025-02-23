@@ -13,6 +13,7 @@ const ProductsPage = () => {
       action.getAllProducts();
       action.getCategories();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>{fetchLoader ? <Spin fullscreen /> : <Products />}</>;
