@@ -1,11 +1,13 @@
 import React from "react";
 import classes from "./App.module.scss";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { routes } from "./routes";
 import { Layout } from "./layout";
 import NotFoundPage from "./pages/notFound";
+import { loggedIn } from "./utils/helper";
 
 function App() {
+  const isLoggedIn = loggedIn();
   return (
     <div className={classes.app}>
       <Routes>
@@ -22,6 +24,10 @@ function App() {
             />
           );
         })}
+        <Route
+          path="/"
+          element={<Navigate to={isLoggedIn ? "/products" : "/home"} />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
