@@ -18,17 +18,17 @@
     label {
       font-size: 14px;
       font-weight: bold;
-      color: #4a3d2b;
+      color: $brown-1;
       margin-bottom: 8px;
     }
   }
   .updateButton {
-    background-color: #faad14;
+    background-color: $yellow-2;
     color: $primary-text;
-    &:hover {
+    &:hover:enabled {
       background-color: transparent !important;
-      color: #ffc53d !important;
-      border-color: #ffc53d !important;
+      color: $yellow-1 !important;
+      border-color: $yellow-1 !important;
     }
   }
   .modalFooter {

@@ -23,21 +23,21 @@
     gap: 4px;
   }
   .viewButton {
-    background-color: #1890ff;
+    background-color: $blue-2;
     color: $primary-text;
     &:hover {
       background-color: transparent;
-      color: #40a9ff !important;
-      border-color: #40a9ff !important;
+      color: $blue-1 !important;
+      border-color: $blue-1 !important;
     }
   }
   .updateButton {
-    background-color: #faad14;
+    background-color: $yellow-2;
     color: $primary-text;
     &:hover {
       background-color: transparent;
-      color: #ffc53d !important;
-      border-color: #ffc53d !important;
+      color: $yellow-1 !important;
+      border-color: $yellow-1 !important;
     }
   }
   .deleteButton {

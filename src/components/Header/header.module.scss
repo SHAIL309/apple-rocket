@@ -14,7 +14,7 @@
       content: "";
       position: absolute;
       height: 2px;
-      background-color: #c78d42;
+      background-color: $yellow-3;
       width: 0;
       transition: width 0.3s ease;
     }
@@ -82,7 +82,7 @@
           left: 0;
           width: 0;
           height: 2px;
-          background-color: #c78d42;
+          background-color: $yellow-3;
           transition: width 0.3s ease;
         }
         &:hover::after {
