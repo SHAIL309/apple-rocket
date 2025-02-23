@@ -1,6 +1,6 @@
 import { useAppSelector } from "src/store/hooks";
 import { Home } from "../../modules/home";
-import { AuthForm } from "src/components/AuthForm";
+import { UserAuthForm } from "src/components/UserAuthForm";
 
 const HomePage = () => {
   const { authAction } = useAppSelector((state) => state.auth);
@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <>
       <Home />
-      <>{!!authAction && <AuthForm />}</>
+      <>{!!authAction && <UserAuthForm />}</>
     </>
   );
 };
