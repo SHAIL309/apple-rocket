@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Modal, Input, Button, message } from "antd";
 import classes from "./updateProductModal.module.scss";
 import { IProduct } from "src/interfaces/products";
@@ -20,13 +20,24 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
 }) => {
   const [updatedProduct, setUpdatedProduct] = useState<IProduct | null>(null);
 
+  const isSameData = useMemo(() => {
+    const titleSame = updatedProduct?.title === productData?.title;
+    const descSame = updatedProduct?.description === productData?.description;
+    /* eslint-disable eqeqeq */
+    const priceSame = updatedProduct?.price == productData?.price; // type not matched as input returns string value
+    const categorySame = updatedProduct?.category === productData?.category;
+
+    // are all fields same?
+    return titleSame && descSame && priceSame && categorySame;
+  }, [updatedProduct, productData]);
+
   useEffect(() => {
     if (productData) {
       setUpdatedProduct({ ...productData });
     }
   }, [productData]);
 
-  const handleChange = (field: string, value: string) => {
+  const handleChange = (field: string, value: string | number) => {
     if (updatedProduct) {
       setUpdatedProduct({ ...updatedProduct, [field]: value });
     }
@@ -104,6 +115,7 @@ const UpdateProductModal: React.FC<UpdateProductModalProps> = ({
             Cancel
           </Button>
           <Button
+            disabled={isSameData}
             type="primary"
             onClick={handleUpdate}
             className={classes.updateButton}
