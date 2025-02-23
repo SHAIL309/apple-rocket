@@ -22,7 +22,7 @@
 }
 .heading {
   font-size: 96px;
-  color: #f4f1ec;
+  color: $primary-text;
   margin: 0;
   @include responsive("smDown") {
     font-size: 48px;
@@ -30,7 +30,7 @@
 }
 .message {
   font-size: 24px;
-  color: #f4f1ec;
+  color: $primary-text;
   margin: 20px 0;
   @include responsive("smDown") {
     font-size: 14px;
@@ -39,12 +39,12 @@
 }
 .homeLink {
   font-size: 20px;
-  color: #c78d42;
+  color: $yellow-3;
   text-decoration: none;
   padding: 10px 20px;
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
-  background-color: #3e2b2a;
+  background-color: $secondary;
   opacity: 0.5;
   &:hover {
     opacity: 1;
