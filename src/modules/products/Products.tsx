@@ -199,6 +199,7 @@ const Products = () => {
       }
     }
     return products;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products, search, selectedOption]);
 
   return (
