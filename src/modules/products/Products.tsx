@@ -11,8 +11,13 @@ import { UpdateProductModal } from "src/components/UpdateProductModal";
 import Search from "antd/es/input/Search";
 import { useWindowSize } from "src/utils/useWindowSize";
 import DataFiltration from "./DataFiltration";
+import { Notification } from "src/components/Notification";
+import { NotificationProps } from "src/components/Notification/Notification";
 
 const Products = () => {
+  const [notification, setNotification] = useState<NotificationProps | null>(
+    null
+  );
   const { products, loading } = useAppSelector((state) => state.products);
   const actions = useStoreActions({ updateProduct, deleteProduct });
 
@@ -28,7 +33,12 @@ const Products = () => {
     value: string;
   } | null>(null); //to handle value and label different
 
-  const handleModalClose = () => setModal(null);
+  const handleModalClose = () => {
+    setModal(null);
+    setTimeout(() => {
+      setNotification(null);
+    }, 5000);
+  };
 
   const handleView = (record: IProduct) => {
     setModal({ data: record, type: "view" });
@@ -119,7 +129,13 @@ const Products = () => {
             onUpdate={(updated_data) => {
               actions.updateProduct({
                 data: updated_data,
-                cb: handleModalClose,
+                cb: () => {
+                  setNotification({
+                    type: "success",
+                    message: "Updated successfully ",
+                  });
+                  handleModalClose();
+                },
               });
             }}
           />
@@ -132,7 +148,13 @@ const Products = () => {
             onConfirm={() => {
               actions.deleteProduct({
                 data: modal.data.id,
-                cb: handleModalClose,
+                cb: () => {
+                  setNotification({
+                    type: "success",
+                    message: "Deleted successfully",
+                  });
+                  handleModalClose();
+                },
               });
             }}
             onCancel={handleModalClose}
@@ -215,6 +237,7 @@ const Products = () => {
         onScroll={() => {}}
       />
       {!!modal && <>{getModal()}</>}
+      {!!notification && <Notification {...notification} />}
     </div>
   );
 };

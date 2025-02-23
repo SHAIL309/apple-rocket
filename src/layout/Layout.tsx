@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "../components/Navbar";
 import { loggedIn } from "src/utils/helper";
 
 interface LayoutProps {
