@@ -103,7 +103,7 @@ const Header: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
   return (
     <nav className={classes.navContainer}>
       <span className={classes.logo}>
-        <Image src={logo} preview={false} />
+        <Image src={logo} preview={false} alt="LOGO" />
       </span>
       {getList()}
     </nav>
