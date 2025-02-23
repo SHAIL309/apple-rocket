@@ -29,8 +29,18 @@ export const P_COLUMNS = [
 ];
 
 export const filterOptions = {
-  price: ["Under $50", "$50 - $100", "$100 - $200", "Above $200"],
-  // rate: ["4 Stars & Up", "3 Stars & Up", "2 Stars & Up", "1 Star & Up"],
+  price: [
+    { label: "Under $50", value: "0-50" },
+    { label: "$50 - $100", value: "50-100" },
+    { label: "$100 - $200", value: "100-200" },
+    { label: "Above $200", value: "200-" },
+  ],
+  ratings: [
+    { label: "4 Stars & Up", value: "4" },
+    { label: "3 Stars & Up", value: "3" },
+    { label: "2 Stars & Up", value: "2" },
+    { label: "1 Star & Up", value: "1" },
+  ],
 };
 
 export const DUMMY_DATA = [

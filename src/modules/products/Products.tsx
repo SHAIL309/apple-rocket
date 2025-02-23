@@ -23,7 +23,10 @@ const Products = () => {
     null
   );
   const [selectedFilter, setSelectedFilter] = useState<string>("");
-  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<{
+    label: string;
+    value: string;
+  } | null>(null); //to handle value and label different
 
   const handleModalClose = () => setModal(null);
 
@@ -156,12 +159,22 @@ const Products = () => {
     if (!!search) {
       return products.filter((p) => p.title.includes(search));
     }
-    if (!!selectedFilter && !!selectedFilter) {
-      return products.filter(
-        (p) =>
-          p[selectedFilter.toLowerCase() as "category" | "price"] ===
-          selectedOption
-      );
+    if (!!selectedFilter && !!selectedOption) {
+      switch (selectedFilter) {
+        case "category":
+          return products.filter((p) => p.category === selectedOption.value);
+        case "ratings":
+          return products.filter(
+            (p) => p.rating.rate > parseInt(selectedOption.value)
+          );
+        case "price":
+          return products.filter((p) => {
+            const range = selectedOption.value.split("-");
+            return !!range[1]
+              ? p.price > parseInt(range[0]) && p.price < parseInt(range[1]) //if upper and lower limit is available
+              : p.price > parseInt(range[0]); // if only lower limit is available
+          });
+      }
     }
     return products;
   }, [products, search, selectedOption]);
@@ -170,8 +183,10 @@ const Products = () => {
     <div className={classes.container}>
       <div className={classes.filterWrapper}>
         <Search
-          placeholder="Search product"
+          placeholder="Search product..."
           onChange={(e) => {
+            setSelectedFilter("");
+            setSelectedOption(null);
             setSearch(e.target.value);
           }}
           className={classes.search}

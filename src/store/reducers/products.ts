@@ -16,7 +16,7 @@ export interface IProductsSlice {
   fetchLoader: boolean;
   loading: boolean;
   error: string;
-  categories: any;
+  categories: string[];
   fetchCatLoading: boolean;
 }
 
@@ -27,7 +27,7 @@ const initialState: IProductsSlice = {
   loading: false,
   error: "",
   message: "",
-  categories: null,
+  categories: [],
   fetchCatLoading: false,
 };
 

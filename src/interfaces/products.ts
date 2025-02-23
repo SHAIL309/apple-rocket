@@ -13,7 +13,12 @@ export interface IProduct {
   rating: IRating;
 }
 
+export interface IFilter {
+  label: string;
+  value: string | number;
+}
 export interface IFilterOptions {
-  category: string[];
-  price: string[];
+  category: IFilter[];
+  price: IFilter[];
+  ratings: IFilter[];
 }

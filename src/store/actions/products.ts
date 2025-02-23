@@ -67,6 +67,6 @@ export const getCategories = createAsyncThunk(
       cb();
     }
 
-    return resp;
+    return resp as string[];
   }
 );
