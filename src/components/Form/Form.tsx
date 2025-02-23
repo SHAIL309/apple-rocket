@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./form.module.scss";
 import { Button, Form, Input } from "antd";
-import { Rule, FormItemProps } from "antd/es/form";
+import { FormItemProps } from "antd/es/form";
 
 export const requiredMessage = "This field is required";
 
