@@ -24,9 +24,12 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: () => {
+    logout: (state, action) => {
       localStorage.removeItem("isLoggedIn");
-      window.location.reload();
+      // Call the callback function, if any, before resetting the state
+      if (action.payload && typeof action.payload === "function") {
+        action.payload();
+      }
       return initialState;
     },
     reset: () => initialState,

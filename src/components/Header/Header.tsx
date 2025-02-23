@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../../assets/images/Logo.png";
 
 import { Image } from "antd";
-import { AUTH_ACTIONS } from "../../constants/navbar";
+import { AUTH_ACTIONS } from "../../constants/header";
 import classes from "./header.module.scss";
 import { useWindowSize } from "src/utils/useWindowSize";
 import {
@@ -16,8 +16,9 @@ import { useStoreActions } from "src/store/hooks";
 import { userAuthAction } from "src/store/actions";
 import { logout } from "src/store/reducers/auth";
 import { getUserData } from "src/utils/helper";
+import { useNavigate } from "react-router-dom";
 
-const NAVBAR_OPTIONS = {
+const HEADER_OPTIONS = {
   loggedIn: [{ label: AUTH_ACTIONS.LOGOUT, icon: <LogoutOutlined /> }],
   public: [
     { label: AUTH_ACTIONS.LOGIN, icon: <LoginOutlined /> },
@@ -35,9 +36,9 @@ const navList = (
   const options = isLoggedIn
     ? [
         { label: `Welcome ${userData.username}`, icon: <UserOutlined /> },
-        ...NAVBAR_OPTIONS.loggedIn,
+        ...HEADER_OPTIONS.loggedIn,
       ]
-    : NAVBAR_OPTIONS.public;
+    : HEADER_OPTIONS.public;
   return (
     <ul className={`${classes.list} ${isMobile ? classes.mobileList : ""}`}>
       {options.map((o, i) => (
@@ -59,6 +60,7 @@ const navList = (
 const Header: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
   const [show, setShow] = useState(false);
   const { isMobile } = useWindowSize();
+  const navigate = useNavigate();
   const action = useStoreActions({ userAuthAction, logout });
 
   const closeMenu = () => setShow(false);
@@ -66,7 +68,7 @@ const Header: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
   const handleAction = (k: string) => {
     switch (k) {
       case AUTH_ACTIONS.LOGOUT:
-        return setTimeout(() => action.logout(), 1000);
+        return setTimeout(() => action.logout(() => navigate("/home")), 1000);
       case AUTH_ACTIONS.LOGIN:
         closeMenu();
         return action.userAuthAction({ data: AUTH_ACTIONS.LOGIN });
