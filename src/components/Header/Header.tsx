@@ -3,7 +3,7 @@ import logo from "../../assets/images/Logo.png";
 
 import { Image } from "antd";
 import { AUTH_ACTIONS } from "../../constants/navbar";
-import classes from "./navbar.module.scss";
+import classes from "./header.module.scss";
 import { useWindowSize } from "src/utils/useWindowSize";
 import {
   LoginOutlined,
@@ -56,7 +56,7 @@ const navList = (
   );
 };
 
-const Navbar: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
+const Header: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
   const [show, setShow] = useState(false);
   const { isMobile } = useWindowSize();
   const action = useStoreActions({ userAuthAction, logout });
@@ -108,4 +108,4 @@ const Navbar: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
   );
 };
 
-export default Navbar;
+export default Header;

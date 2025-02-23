@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { Navbar } from "../components/Navbar";
+import { Header } from "src/components/Header";
 import { loggedIn } from "src/utils/helper";
 
 interface LayoutProps {
@@ -24,7 +24,7 @@ const Layout: React.FC<LayoutProps> = ({ children, isPrivate }) => {
   return (
     <>
       <header style={{ height: "60px" }}>
-        <Navbar isLoggedIn={!!isLoggedIn} />
+        <Header isLoggedIn={!!isLoggedIn} />
       </header>
       <main style={{ marginTop: "40px" }}>{children}</main>
     </>
