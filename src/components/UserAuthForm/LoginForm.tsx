@@ -19,7 +19,6 @@ export const formFields = [
     name: "password",
     rules: [{ required: true, message: requiredMessage }],
   },
-  ,
 ];
 
 const LoginForm = ({ onLoginFinish }: { onLoginFinish: any }) => {
