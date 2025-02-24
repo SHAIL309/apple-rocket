@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./form.module.scss";
 import { Button, Form, Input } from "antd";
-import { FormItemProps } from "antd/es/form";
 
 export const requiredMessage = "This field is required";
 
 interface FormProps {
   formName: string;
-  onSubmit: (values: any) => void;
-  formFields: FormItemProps[];
+  onSubmit: (values: any, cb: () => void) => void;
+  formFields: any;
   SubmitButtonText?: string;
 }
 
@@ -18,31 +17,43 @@ const FormComponent: React.FC<FormProps> = ({
   onSubmit,
   SubmitButtonText = "Submit",
 }) => {
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+
+  const handleLoad = () => setLoading(!loading);
+
   return (
     <Form
       name={formName}
-      onFinish={onSubmit}
+      onFinish={(val) => {
+        handleLoad();
+        onSubmit(val, handleLoad);
+      }}
       initialValues={{
         remember: true,
       }}
       className={classes.form}
+      labelCol={{ span: 8 }}
+      labelAlign="left"
     >
-      {formFields.map(({ label, rules, ...rest }) => {
+      {formFields.map(({ ...rest }) => {
         return (
-          <Form.Item rules={[{ ...rules, message: requiredMessage }]} {...rest}>
-            <label className={classes.label} htmlFor={rest.name}>
+          <Form.Item rules={[{ ...rest, message: requiredMessage }]} {...rest}>
+            {/* <label className={classes.label} htmlFor={rest.name}>
               {label}
               <span>*</span>
-            </label>
-            {rest.name === "password" || rest.name === "confirm password" ? (
+            </label> */}
+            {rest.name === "password" || rest.name === "confirmPassword" ? (
               <Input.Password
                 name={rest.name}
                 className={classes.input}
-                placeholder={`Enter ${label}`}
+                placeholder={`Enter ${rest?.label}`}
               />
             ) : (
-              <Input className={classes.input} placeholder={`Enter ${label}`} />
+              <Input
+                className={classes.input}
+                placeholder={`Enter ${rest?.label}`}
+              />
             )}
           </Form.Item>
         );
@@ -53,7 +64,9 @@ const FormComponent: React.FC<FormProps> = ({
           type="primary"
           htmlType="submit"
           block
+          loading={loading}
           disabled={
+            loading ||
             !form.isFieldsTouched(true) ||
             form.getFieldsError().filter(({ errors }) => errors.length).length >
               0
