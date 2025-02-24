@@ -1,9 +1,26 @@
 import React, { useState } from "react";
-import { Button, Form, Input } from "antd";
+
 import classes from "./userAuthForm.module.scss";
-import { requiredMessage } from "../Form/Form";
+
 import { AUTH_ACTIONS } from "src/constants/header";
 import { getUserData } from "src/utils/helper";
+import { Form } from "../Form";
+import { requiredMessage } from "../Form/Form";
+
+export const formFields = [
+  {
+    label: "Username",
+    name: "username",
+    rules: [{ required: true, message: requiredMessage }],
+  },
+
+  {
+    label: "Password",
+    name: "password",
+    rules: [{ required: true, message: requiredMessage }],
+  },
+  ,
+];
 
 const LoginForm = ({ onLoginFinish }: { onLoginFinish: any }) => {
   const [error, setError] = useState("");
@@ -30,48 +47,12 @@ const LoginForm = ({ onLoginFinish }: { onLoginFinish: any }) => {
   return (
     <>
       <Form
-        name="login"
-        onFinish={handelSubmit}
-        initialValues={{
-          remember: true,
-        }}
-        className={classes.form}
-      >
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: requiredMessage }]}
-        >
-          {/* <label className={classes.label} htmlFor={"username"}>
-          Username
-          <span>*</span>
-        </label> */}
-          <Input className={classes.input} />
-        </Form.Item>
+        formName="Login"
+        formFields={formFields}
+        onSubmit={handelSubmit}
+        SubmitButtonText={AUTH_ACTIONS.LOGIN}
+      />
 
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: requiredMessage }]}
-        >
-          {/* <label className={classes.label} htmlFor={"password"}>
-          Password
-          <span>*</span>
-        </label> */}
-          <Input.Password className={classes.input} />
-        </Form.Item>
-
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            block
-            className={classes.submitButton}
-          >
-            {AUTH_ACTIONS.LOGIN}
-          </Button>
-        </Form.Item>
-      </Form>
       {!!error && <span className={classes.error}>{error}</span>}
     </>
   );

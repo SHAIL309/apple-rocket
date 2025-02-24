@@ -21,5 +21,12 @@
     border-radius: 4px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+    &:disabled {
+      background-color: $primary !important;
+    }
+    &:hover &:not(:disabled) {
+      background-color: transparent !important;
+      color: $primary !important;
+    }
   }
 }
