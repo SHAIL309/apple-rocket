@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useAppSelector, useStoreActions } from "src/store/hooks";
 import { AUTH_ACTIONS } from "src/constants/header";
@@ -12,20 +12,31 @@ import { Modal } from "antd";
 
 const UserAuthForm = () => {
   const { authAction, actionLoading } = useAppSelector((state) => state.auth);
+  const [blockChange, setBlockChange] = useState(false);
   const navigate = useNavigate();
   const actions = useStoreActions({ userLogin, userSignUp, userAuthAction });
   const isLogin = authAction === AUTH_ACTIONS.LOGIN;
 
   const handelModalClose = (cb?: () => void) => {
+    if (blockChange) {
+      return;
+    }
     actions.userAuthAction({ data: "", cb: !!cb ? cb : () => {} });
   };
 
-  const onSubmit = (values: IUser) => {
+  const handleBlockChange = () => setBlockChange(!blockChange);
+
+  const onSubmit = (values: IUser, cb: () => void) => {
+    handleBlockChange();
     isLogin
       ? actions.userLogin({
           data: values,
           cb: () => {
+            if (cb) {
+              cb();
+            }
             setTimeout(() => {
+              handleBlockChange();
               handelModalClose(() => navigate("/products"));
             }, 2000);
           },
@@ -33,7 +44,11 @@ const UserAuthForm = () => {
       : actions.userSignUp({
           data: values,
           cb: () => {
+            if (cb) {
+              cb();
+            }
             setTimeout(() => {
+              handleBlockChange();
               handelModalClose(() => navigate("/products"));
             }, 2000);
           },
@@ -53,8 +68,15 @@ const UserAuthForm = () => {
         <>
           New user?{" "}
           <span
-            className={classes.action}
+            className={
+              blockChange
+                ? `${classes.action} ${classes.disable}`
+                : classes.action
+            }
             onClick={() => {
+              if (blockChange) {
+                return;
+              }
               actions.userAuthAction({ data: AUTH_ACTIONS.SIGNUP });
             }}
           >
@@ -65,8 +87,15 @@ const UserAuthForm = () => {
         <>
           Existing user?{" "}
           <span
-            className={classes.action}
+            className={
+              blockChange
+                ? `${classes.action} ${classes.disable}`
+                : classes.action
+            }
             onClick={() => {
+              if (blockChange) {
+                return;
+              }
               actions.userAuthAction({ data: AUTH_ACTIONS.LOGIN });
             }}
           >
@@ -83,6 +112,9 @@ const UserAuthForm = () => {
         title={isLogin ? "Login Form" : "Signup form"}
         open={!!authAction}
         onCancel={() => {
+          handelModalClose();
+        }}
+        onClose={() => {
           handelModalClose();
         }}
         cancelButtonProps={{}}
